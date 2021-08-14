@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import pushWithParams from './utils/pushWithParams';
-import calculateOffset from './utils/calculateOffset';
-import { PageInfo, UseUrlPaginationArgs } from './types';
+import pushWithParams from '../utils/pushWithParams';
+import calculateOffset from '../utils/calculateOffset';
+import { PageInfo, UseUrlPaginationArgs } from '../types';
 import { useEffect } from 'react';
-import useDidMount from './utils/useDidMount';
-import useHotKey from './utils/useHotKey';
-import isPageValid from './utils/isPageValid';
+import useDidMount from '../utils/useDidMount';
+import useHotKey from '../utils/useHotKey';
+import isPageValid from '../utils/isPageValid';
 
 export default function useUrlPagination({
   page: initialPage = 0,
@@ -28,7 +28,7 @@ export default function useUrlPagination({
     ? parseInt(query[perPageKey] as string, 10)
     : initialPerPage;
   const offset = calculateOffset({ page, perPage });
-  const onChange = async (newPage: number) =>
+  const onChange = (newPage: number) =>
     pushWithParams(
       router,
       { [pageKey]: newPage + 1 },
@@ -37,7 +37,7 @@ export default function useUrlPagination({
         scroll: scrollToTop,
       }
     );
-  const onPerPageChange = async (newPerPage: number) =>
+  const onPerPageChange = (newPerPage: number) =>
     pushWithParams(
       router,
       { [perPageKey]: newPerPage + 1 },
