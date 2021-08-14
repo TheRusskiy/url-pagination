@@ -8,17 +8,16 @@ export type PageInfo = {
   pageKey?: string;
 };
 
-export type UseStatePaginationArgs = {
+type BasePaginationArgs = {
   page?: number;
   perPage: number;
   scrollToTop?: boolean;
-  initialPage?: number;
-};
+  total?: number;
+}
 
-export type UseUrlPaginationArgs = {
-  page?: number;
-  perPage: number;
-  scrollToTop?: boolean;
+export type UseStatePaginationArgs = BasePaginationArgs
+
+export type UseUrlPaginationArgs = BasePaginationArgs & {
   pageKey?: string;
   perPageKey?: string;
   includeHref?: boolean;
