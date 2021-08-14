@@ -37,7 +37,7 @@
   },
   "name": "next-url-pagination",
   "author": "Dmitry Ishkov",
-  "module": "dist/next-url-pagination.esm.js",
+  "module": "dist/index.esm.js",
   "size-limit": [
     {
       "path": "dist/next-url-pagination.cjs.production.min.js",
