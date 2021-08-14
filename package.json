@@ -22,6 +22,7 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
+    "next": ">=10.0.0",
     "react": ">=16"
   },
   "husky": {
@@ -56,10 +57,15 @@
     "@storybook/addon-links": "^6.3.7",
     "@storybook/addons": "^6.3.7",
     "@storybook/react": "^6.3.7",
+    "@types/lodash": "^4.14.172",
     "@types/react": "^17.0.17",
     "@types/react-dom": "^17.0.9",
+    "@types/react-paginate": "^7.1.1",
     "babel-loader": "^8.2.2",
+    "classnames": "^2.3.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^7.0.1",
+    "next": "^11.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
@@ -67,5 +73,11 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "query-string": "^7.0.1",
+    "react-paginate": "^7.1.3"
   }
 }
