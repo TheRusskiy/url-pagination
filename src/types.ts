@@ -12,6 +12,7 @@ type BasePaginationArgs = {
   page?: number;
   perPage: number;
   scrollToTop?: boolean;
+  hotkeys?: boolean;
   total?: number;
 }
 
