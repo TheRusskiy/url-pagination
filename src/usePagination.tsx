@@ -34,7 +34,7 @@ export default function usePagination({
     setPerPage(initialPerPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPerPage]);
-  const offset = calculateOffset(page, perPage);
+  const offset = calculateOffset({ page, perPage });
   const onChange = (newPage: number) => {
     setPage(newPage);
     if (scrollToTop) {

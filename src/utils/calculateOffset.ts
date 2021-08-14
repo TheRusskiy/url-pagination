@@ -1,4 +1,10 @@
-const calculateOffset = (page: number, perPage: number): number => {
+const calculateOffset = ({
+  page,
+  perPage,
+}: {
+  page: number;
+  perPage: number;
+}): number => {
   return page * perPage;
 };
 

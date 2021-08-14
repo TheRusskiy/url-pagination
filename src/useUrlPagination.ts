@@ -27,7 +27,7 @@ export default function useUrlPagination({
   const perPage = query[perPageKey]
     ? parseInt(query[perPageKey] as string, 10)
     : initialPerPage;
-  const offset = calculateOffset(page, perPage);
+  const offset = calculateOffset({ page, perPage });
   const onChange = async (newPage: number) =>
     pushWithParams(
       router,
