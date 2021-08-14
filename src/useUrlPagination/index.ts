@@ -60,7 +60,7 @@ export default function useUrlPagination({
   }, [initialPerPage]);
 
   useHotKey(
-    'ArrowLeft',
+    ['ArrowLeft', 'PageUp'],
     () => {
       const newPage = page - 1;
 
@@ -72,7 +72,7 @@ export default function useUrlPagination({
   );
 
   useHotKey(
-    'ArrowRight',
+    ['ArrowRight', 'PageDown'],
     () => {
       const newPage = page + 1;
 

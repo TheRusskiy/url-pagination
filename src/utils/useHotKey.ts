@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-type Key = 'ArrowLeft' | 'ArrowRight';
+type Key = 'ArrowLeft' | 'ArrowRight' | 'PageUp' | 'PageDown';
 
 const noop = () => {};
 
 export default function useHotKey(
-  key: Key,
+  key: Key | Key[],
   callback: () => unknown = noop,
   enabled: boolean = true
 ) {
@@ -21,7 +21,7 @@ export default function useHotKey(
 
     const listener = (event: KeyboardEvent) => {
       if ((event.target as HTMLElement).nodeName === 'INPUT') return;
-      if (event.code === key) {
+      if (([key].flat() as string[]).includes(event.code)) {
         if (callbackRef.current) {
           callbackRef.current();
         }
