@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import pushWithParams from './pushWithParams';
-import calculateOffset from './calculateOffset';
+import pushWithParams from './utils/pushWithParams';
+import calculateOffset from './utils/calculateOffset';
 import { PageInfo, UseUrlPaginationArgs } from './types';
 import { useEffect } from 'react';
-import useDidMount from './useDidMount';
-import useHotKey from './useHotKey';
-import isPageValid from './isPageValid';
+import useDidMount from './utils/useDidMount';
+import useHotKey from './utils/useHotKey';
+import isPageValid from './utils/isPageValid';
 
 export default function useUrlPagination({
   page: initialPage = 0,

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import calculateOffset from './calculateOffset';
+import calculateOffset from './utils/calculateOffset';
 import { PageInfo, UseStatePaginationArgs } from './types';
-import useDidMount from './useDidMount';
-import useHotKey from './useHotKey';
-import isPageValid from './isPageValid';
+import useDidMount from './utils/useDidMount';
+import useHotKey from './utils/useHotKey';
+import isPageValid from './utils/isPageValid';
 
 function scrollToTopOfDocument() {
   const main = document.body;
