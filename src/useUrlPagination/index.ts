@@ -29,8 +29,11 @@ export default function useUrlPagination({
     ? parseInt(query[perPageKey] as string, 10)
     : initialPerPage;
   const offset = calculateOffset({ page, perPage });
-  const onChange = (newPage: number) =>
-    pushWithParams(
+
+  const onChange = (newPage: number) => {
+    if (!isPageValid(newPage, perPage, total)) return;
+
+    return pushWithParams(
       router,
       { [pageKey]: newPage + 1 },
       {
@@ -38,6 +41,7 @@ export default function useUrlPagination({
         scroll: scrollToTop,
       }
     );
+  };
   const onPerPageChange = (newPerPage: number) =>
     pushWithParams(
       router,
@@ -64,8 +68,6 @@ export default function useUrlPagination({
     () => {
       const newPage = page - 1;
 
-      if (!isPageValid(newPage, perPage, total)) return;
-
       onChange(newPage);
     },
     hotkeys
@@ -75,8 +77,6 @@ export default function useUrlPagination({
     ['ArrowRight', 'PageDown'],
     () => {
       const newPage = page + 1;
-
-      if (!isPageValid(newPage, perPage, total)) return;
 
       onChange(newPage);
     },

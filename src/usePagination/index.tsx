@@ -35,7 +35,10 @@ export default function usePagination({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPerPage]);
   const offset = calculateOffset({ page, perPage });
+
   const onChange = (newPage: number) => {
+    if (!isPageValid(newPage, perPage, total)) return;
+
     setPage(newPage);
     if (scrollToTop) {
       scrollToTopOfDocument();
@@ -50,8 +53,6 @@ export default function usePagination({
     () => {
       const newPage = page - 1;
 
-      if (!isPageValid(newPage, perPage, total)) return;
-
       onChange(newPage);
     },
     hotkeys
@@ -61,8 +62,6 @@ export default function usePagination({
     ['ArrowRight', 'PageDown'],
     () => {
       const newPage = page + 1;
-
-      if (!isPageValid(newPage, perPage, total)) return;
 
       onChange(newPage);
     },
