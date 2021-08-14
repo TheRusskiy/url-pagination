@@ -43,11 +43,11 @@
   "size-limit": [
     {
       "path": "dist/url-pagination.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "11 KB"
     },
     {
-      "path": "dist/url-pagination.esm.js",
-      "limit": "10 KB"
+      "path": "dist/index.esm.js",
+      "limit": "11 KB"
     }
   ],
   "devDependencies": {
