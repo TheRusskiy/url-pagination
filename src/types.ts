@@ -1,4 +1,4 @@
-import { HrefBuilder } from "./utils/useHrefBuilder";
+import { HrefBuilder } from './utils/useHrefBuilder';
 
 export type PageInfo = {
   perPage: number;
@@ -8,7 +8,7 @@ export type PageInfo = {
   page: number;
   includeHref: boolean;
   pageKey?: string;
-  hrefBuilder?: HrefBuilder
+  hrefBuilder?: HrefBuilder;
 };
 
 type BasePaginationArgs = {

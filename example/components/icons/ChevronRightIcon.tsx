@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseIcon from 'components/icons/BaseIcon';
+import BaseIcon from './BaseIcon';
 
 export const ChevronRightIcon = ({ className }: { className?: string }) => (
   <BaseIcon className={className} fill="currentColor">

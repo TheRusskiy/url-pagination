@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import useDidMount from '../utils/useDidMount';
 import useHotKey from '../utils/useHotKey';
 import isPageValid from '../utils/isPageValid';
-import useHrefBuilder from "../utils/useHrefBuilder";
+import useHrefBuilder from '../utils/useHrefBuilder';
 
 export default function useUrlPagination({
   page: initialPage = 0,
@@ -83,7 +83,7 @@ export default function useUrlPagination({
     hotkeys
   );
 
-  const hrefBuilder = useHrefBuilder({ pageKey })
+  const hrefBuilder = useHrefBuilder({ pageKey });
 
   return {
     offset,
@@ -93,6 +93,6 @@ export default function useUrlPagination({
     onPerPageChange,
     pageKey,
     includeHref,
-    hrefBuilder
+    hrefBuilder,
   };
 }

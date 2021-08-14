@@ -1,9 +1,13 @@
-import { useRouter } from 'next/router'
-import addParams from './addParams'
+import { useRouter } from 'next/router';
+import addParams from './addParams';
 
-export type HrefBuilder = (pageIndex: number) => string
+export type HrefBuilder = (pageIndex: number) => string;
 
-export default function useHrefBuilder({ pageKey }: { pageKey: string }): HrefBuilder {
-  const router = useRouter()
-  return (pageIndex: number) => addParams(router, { [pageKey]: pageIndex })
+export default function useHrefBuilder({
+  pageKey,
+}: {
+  pageKey: string;
+}): HrefBuilder {
+  const router = useRouter();
+  return (pageIndex: number) => addParams(router, { [pageKey]: pageIndex });
 }

@@ -4,22 +4,32 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 7777",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
     "next": "11.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "url-pagination": "^0.2.3",
     "react-paginate": "^7.1.3",
-    "tailwindcss": "^2.2.7"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "url-pagination": "^0.2.4"
   },
   "devDependencies": {
     "@types/react": "17.0.17",
+    "autoprefixer": "^9",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "postcss": "^7",
     "typescript": "4.3.5"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }
