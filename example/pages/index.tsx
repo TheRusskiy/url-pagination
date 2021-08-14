@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Pagination from '../components/Pagination';
 import { usePagination, useUrlPagination } from 'url-pagination';
 import useSWR from 'swr';
+import { useEffect, useState } from "react"
 
 type Response = {
   results: string[];
@@ -10,11 +11,17 @@ type Response = {
 };
 
 const PaginationWithState = () => {
-  const pagination = usePagination({ perPage: 6 });
+  const [total, setTotal] = useState<number | undefined>()
+
+  const pagination = usePagination({ perPage: 6, total });
 
   const { data, error } = useSWR<Response>(
     `/api/posts?offset=${pagination.offset}&limit=${pagination.perPage}`
   );
+
+  useEffect(() => {
+    setTotal(data?.total)
+  }, [data?.total])
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -35,11 +42,16 @@ const PaginationWithState = () => {
 };
 
 const PaginationWithUrl = () => {
-  const pagination = useUrlPagination({ perPage: 6, hotkeys: true });
+  const [total, setTotal] = useState<number | undefined>()
+  const pagination = useUrlPagination({ perPage: 6, hotkeys: true, total });
 
   const { data, error } = useSWR<Response>(
     `/api/posts?offset=${pagination.offset}&limit=${pagination.perPage}`
   );
+
+  useEffect(() => {
+    setTotal(data?.total)
+  }, [data?.total])
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
