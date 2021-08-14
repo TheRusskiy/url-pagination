@@ -4,8 +4,8 @@ import calculateOffset from './calculateOffset';
 import { PageInfo, UseUrlPaginationArgs } from './types';
 import { useEffect } from 'react';
 import useDidMount from './useDidMount';
-import useHotKey from "./useHotKey";
-import isPageValid from "./isPageValid";
+import useHotKey from './useHotKey';
+import isPageValid from './isPageValid';
 
 export default function useUrlPagination({
   page: initialPage = 0,
@@ -16,7 +16,7 @@ export default function useUrlPagination({
   perPageKey = 'size',
   shallowNavigation = true,
   hotkeys = false,
-  total
+  total,
 }: UseUrlPaginationArgs): PageInfo {
   const didMount = useDidMount();
   const router = useRouter();
@@ -58,21 +58,29 @@ export default function useUrlPagination({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPerPage]);
 
-  useHotKey("ArrowLeft", () => {
-    const newPage = page - 1
+  useHotKey(
+    'ArrowLeft',
+    () => {
+      const newPage = page - 1;
 
-    if (!isPageValid(newPage, perPage, total)) return
+      if (!isPageValid(newPage, perPage, total)) return;
 
-    onChange(newPage)
-  }, hotkeys)
+      onChange(newPage);
+    },
+    hotkeys
+  );
 
-  useHotKey("ArrowRight", () => {
-    const newPage = page - 1
+  useHotKey(
+    'ArrowRight',
+    () => {
+      const newPage = page - 1;
 
-    if (!isPageValid(newPage, perPage, total)) return
+      if (!isPageValid(newPage, perPage, total)) return;
 
-    onChange(newPage)
-  }, hotkeys)
+      onChange(newPage);
+    },
+    hotkeys
+  );
 
   return {
     offset,

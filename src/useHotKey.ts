@@ -2,9 +2,13 @@ import { useEffect, useRef } from 'react';
 
 type Key = 'ArrowLeft' | 'ArrowRight';
 
-const noop = () => {}
+const noop = () => {};
 
-export default function useHotKey(key: Key, callback: () => unknown = noop, enabled: boolean = true) {
+export default function useHotKey(
+  key: Key,
+  callback: () => unknown = noop,
+  enabled: boolean = true
+) {
   const callbackRef = useRef<() => void>();
 
   useEffect(() => {
@@ -13,9 +17,9 @@ export default function useHotKey(key: Key, callback: () => unknown = noop, enab
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (!enabled) return
+    if (!enabled) return;
 
-      const listener = (event: KeyboardEvent) => {
+    const listener = (event: KeyboardEvent) => {
       if ((event.target as HTMLElement).nodeName === 'INPUT') return;
       if (event.code === key) {
         if (callbackRef.current) {

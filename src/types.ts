@@ -14,9 +14,9 @@ type BasePaginationArgs = {
   scrollToTop?: boolean;
   hotkeys?: boolean;
   total?: number;
-}
+};
 
-export type UseStatePaginationArgs = BasePaginationArgs
+export type UseStatePaginationArgs = BasePaginationArgs;
 
 export type UseUrlPaginationArgs = BasePaginationArgs & {
   pageKey?: string;

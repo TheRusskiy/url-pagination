@@ -1,11 +1,4 @@
-import useUrlPagination from './useUrlPagination';
-import usePagination from './usePagination';
-import calculatePage from './calculatePage';
-import calculateOffset from './calculateOffset';
-
-export default {
-  useUrlPagination,
-  usePagination,
-  calculatePage,
-  calculateOffset,
-};
+export * as useUrlPagination from './useUrlPagination';
+export * as usePagination from './usePagination';
+export * as calculatePage from './calculatePage';
+export * as calculateOffset from './calculateOffset';

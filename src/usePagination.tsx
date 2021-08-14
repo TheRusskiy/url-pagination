@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import calculateOffset from './calculateOffset';
 import { PageInfo, UseStatePaginationArgs } from './types';
 import useDidMount from './useDidMount';
-import useHotKey from "./useHotKey";
-import isPageValid from "./isPageValid";
+import useHotKey from './useHotKey';
+import isPageValid from './isPageValid';
 
 function scrollToTopOfDocument() {
   const main = document.body;
@@ -17,7 +17,7 @@ export default function usePagination({
   page: initialPage = 0,
   scrollToTop = false,
   hotkeys = false,
-  total
+  total,
 }: UseStatePaginationArgs): PageInfo {
   const didMount = useDidMount();
   const [page, setPage] = useState<number>(initialPage);
@@ -45,21 +45,29 @@ export default function usePagination({
     setPerPage(newPerPage);
   };
 
-  useHotKey("ArrowLeft", () => {
-    const newPage = page - 1
+  useHotKey(
+    'ArrowLeft',
+    () => {
+      const newPage = page - 1;
 
-    if (!isPageValid(newPage, perPage, total)) return
+      if (!isPageValid(newPage, perPage, total)) return;
 
-    onChange(newPage)
-  }, hotkeys)
+      onChange(newPage);
+    },
+    hotkeys
+  );
 
-  useHotKey("ArrowRight", () => {
-    const newPage = page - 1
+  useHotKey(
+    'ArrowRight',
+    () => {
+      const newPage = page - 1;
 
-    if (!isPageValid(newPage, perPage, total)) return
+      if (!isPageValid(newPage, perPage, total)) return;
 
-    onChange(newPage)
-  }, hotkeys)
+      onChange(newPage);
+    },
+    hotkeys
+  );
 
   return {
     offset,
