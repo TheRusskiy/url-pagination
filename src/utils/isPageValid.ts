@@ -7,7 +7,7 @@ export default function isPageValid(
 
   if (!total) return true;
 
-  const maxPage = Math.ceil(total / perPage);
+  const maxPage = Math.ceil(total / perPage) - 1; // 0 indexed
 
   return page <= maxPage;
 }
