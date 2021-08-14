@@ -73,7 +73,7 @@ export default function useUrlPagination({
   useHotKey(
     'ArrowRight',
     () => {
-      const newPage = page - 1;
+      const newPage = page + 1;
 
       if (!isPageValid(newPage, perPage, total)) return;
 
