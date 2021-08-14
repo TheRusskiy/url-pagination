@@ -19,6 +19,7 @@
     "url-pagination": "^0.2.5"
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
     "@types/react": "17.0.17",
     "@types/react-paginate": "^7.1.1",
     "autoprefixer": "^9",
