@@ -12,7 +12,7 @@ function main() {
   sourceObj['size-limit'].forEach((obj: any) => {
     obj.path = (obj.path as string).replace(/^dist\//, '')
   })
-  sourceObj.files = ['.']
+  sourceObj.files = ['*']
   fs.writeFileSync(__dirname + "/dist/package.json", Buffer.from(JSON.stringify(sourceObj, null, 2), "utf-8") );
 
   fs.copyFileSync(__dirname + "/.npmignore", __dirname + "/dist/.npmignore");
