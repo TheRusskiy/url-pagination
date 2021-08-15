@@ -14,7 +14,7 @@
   "scripts": {
     "start": "tsdx watch --tsconfig ./tsconfig.tsdx.json",
     "build": "tsdx build --tsconfig ./tsconfig.tsdx.json && npm run postBuild",
-    "postBuild": "ts-node -O '{\"module\":\"commonjs\"}' ./postBuild.ts",
+    "postBuild": "ts-node -O \"{\\\"module\\\":\\\"commonjs\\\"}\" ./postBuild.ts",
     "test": "tsdx --tsconfig ./tsconfig.tsdx.json test --passWithNoTests",
     "lint": "tsdx lint src test --tsconfig ./tsconfig.tsdx.json",
     "prepare": "tsdx build --tsconfig ./tsconfig.tsdx.json && npm run postBuild",
