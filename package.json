@@ -13,7 +13,8 @@
   "sideEffects": false,
   "scripts": {
     "start": "tsdx watch --tsconfig ./tsconfig.tsdx.json",
-    "build": "tsdx build --tsconfig ./tsconfig.tsdx.json",
+    "build": "tsdx build --tsconfig ./tsconfig.tsdx.json && npm run postBuild",
+    "postBuild": "ts-node -O '{\"module\":\"commonjs\"}' ./postBuild.ts",
     "test": "tsdx --tsconfig ./tsconfig.tsdx.json test --passWithNoTests",
     "lint": "tsdx lint src test --tsconfig ./tsconfig.tsdx.json",
     "prepare": "tsdx build --tsconfig ./tsconfig.tsdx.json",
@@ -70,6 +71,7 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "size-limit": "^5.0.3",
+    "ts-node": "^10.2.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.3.5"
