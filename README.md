@@ -93,6 +93,26 @@ type UsePaginationArgs = {
 }
 ```
 
+### calculatePage
+
+Utility to return the current page index based on offset and page size
+
+```typescript
+calculatePage = ({
+  offset: number;
+  perPage: number;
+}): number
+```
+
 ### Pagination component
 
 The "presentation" component is not included in this library, because it's likely going to look very different in each app, however, you can find an example implementation at [example/components/Pagination/index.tsx](https://github.com/TheRusskiy/url-pagination/blob/master/example/components/Pagination/index.tsx)
+
+### Tree shaking
+
+To enable tree shaking and save some space you can import functions like so:
+```typescript
+import useUrlPagination from 'url-pagination/useUrlPagination';
+import usePagination from 'url-pagination/usePagination';
+// ...
+```
