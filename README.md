@@ -1,183 +1,98 @@
-# TODO:
+# url-pagination
 
-# TSDX React w/ Storybook User Guide
+This project has 2 goals:
+  * provide utilities to compute pagination params inside your React components
+  * persist pagination params as a part of URL so a page can be reloaded and linked to (currently we support Next.js router).
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+## See it in action
 
-> This TSDX setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you’re looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+Live example:
+[https://url-pagination.vercel.app](https://url-pagination.vercel.app)
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+Code of the example:
+[example/pages/index.tsx](https://github.com/TheRusskiy/url-pagination/blob/master/example/pages/index.tsx)
 
-## Commands
+## Getting started
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
-
-The recommended workflow is to run TSDX in one terminal:
-
+In your shell:
 ```bash
-npm start # or yarn start
+    yarn add next-url-pagination
+    # or
+    npm install next-url-pagination
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+In your component:
 
-Then run either Storybook or the example playground:
+```typescript jsx
+// ...
+import { useUrlPagination } from 'url-pagination';
 
-### Storybook
+function MyComponent () {
+  const pagination = useUrlPagination({ perPage: 6 });
 
-Run inside another terminal:
-
-```bash
-yarn storybook
-```
-
-This loads the stories from `./stories`.
-
-> NOTE: Stories should reference the components as if using the library, similar to the example playground. This means importing from the root project directory. This has been aliased in the tsconfig and the storybook webpack config as a helper.
-
-### Example
-
-Then run the example inside another:
-
-```bash
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
-```
-
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
-
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle analysis
-
-Calculates the real cost of your library using [size-limit](https://github.com/ai/size-limit) with `npm run size` and visulize it with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/example
-  index.html
-  index.tsx       # test your component here in a demo app
-  package.json
-  tsconfig.json
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-/stories
-  Thing.stories.tsx # EDIT THIS
-/.storybook
-  main.js
-  preview.js
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-#### React Testing Library
-
-We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [size-limit](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
+  // use a data fetching library of your choice
+  const { data, error } = useSWR<Response>(
+    `/some-api/posts?offset=${pagination.offset}&limit=${pagination.perPage}`
+  );
+  
+  return (
+    <>
+      <PostsList posts={data.posts}/>
+      <MyPagination total={data.total} page={pagination.page} onChange={pagination.onChange}  />
+    </>
+  )
 }
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+If you want to keep pagination in React state instead of URL, instead of `useUrlPagination` use `usePagination`.
 
-## Module Formats
+### useUrlPagination
+`useUrlPagination(args: UseUrlPaginationArgs): PageInfo` has the following signature:
 
-CJS, ESModules, and UMD module formats are supported.
-
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
-
-## Deploying the Example Playground
-
-The Playground is just a simple [Parcel](https://parceljs.org) app, you can deploy it anywhere you would normally deploy that. Here are some guidelines for **manually** deploying with the Netlify CLI (`npm i -g netlify-cli`):
-
-```bash
-cd example # if not already in the example folder
-npm run build # builds to dist
-netlify deploy # deploy the dist folder
+``` typescript
+// pass to useUrlPagination
+type UseUrlPaginationArgs = {
+  perPage: number; // number of records per page
+  page?: number = 0; // specify initial page or make the component controlled (if the value changes) 
+  scrollToTop?: boolean = false; // scroll page to the top upon navigation
+  hotkeys?: boolean = false; // use left/right arrows and page up/down to navigation through pagination
+  total?: number; // specify total records, optional, but recommended, without it hotkey pagination won't know when the last page is reached
+  pageKey?: string = 'page'; // under what key the current page is going to appear in URL
+  perPageKey?: string 'size'; // under what key the page size is going to appear in URL
+  shallowNavigation?: boolean = true; // if true performs shallow Next.js router navigation upon changes
+  includeHref?: boolean = false; // this argument is passed through to returned results
+}
 ```
 
-Alternatively, if you already have a git repo connected, you can set up continuous deployment with Netlify:
-
-```bash
-netlify init
-# build command: yarn build && cd example && yarn && yarn build
-# directory to deploy: example/dist
-# pick yes for netlify.toml
+``` typescript
+// get as a result
+type PageInfo = {
+  perPage: number; // size of the page, how many records each page contains
+  offset: number; // what's the offset from the start
+  page: number; // current page, maybe seen as redundant because there's `offset`, but different APIs use different params, it's here for convenience
+  onChange: (page: number) => void; // function to call when a page changes
+  onPerPageChange: (perPage: number) => void;  // function to call when a page size changes
+  pageKey: string; // see UseUrlPaginationArgs, passed through without changes
+  hrefBuilder: (pageIndex: number) => string; // call this function to build a new URL path based on page number
+  includeHref: boolean; // passed through from arguments
+}
 ```
 
-## Named Exports
+### usePagination
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+`usePagination(args: UsePaginationArgs): PageInfo` has the following signature (`PageInfo` is the same as for `UseUrlPaginationArgs`):
 
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
-
-## Usage with Lerna
-
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
-
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
-
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
-
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
+``` typescript
+// pass to usePagination
+type UsePaginationArgs = {
+  perPage: number; // number of records per page
+  page?: number = 0; // specify initial page or make the component controlled (if the value changes) 
+  scrollToTop?: boolean = false; // scroll page to the top upon navigation
+  hotkeys?: boolean = false; // use left/right arrows and page up/down to navigation through pagination
+  total?: number; // specify total records, optional, but recommended, without it hotkey pagination won't know when the last page is reached
+}
 ```
 
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+### Pagination component
+
+The "presentation" component is not included in this library, because it's likely going to look very different in each app, however, you can find an example implementation at [example/components/Pagination/index.tsx](https://github.com/TheRusskiy/url-pagination/blob/master/example/components/Pagination/index.tsx)
