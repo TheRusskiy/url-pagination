@@ -1,13 +1,13 @@
 const calculatePage = ({
-  total,
+  offset,
   perPage,
 }: {
-  total: number;
+  offset: number;
   perPage: number;
 }): number => {
   if (perPage === 0) return 0;
 
-  return Math.ceil(total / perPage);
+  return Math.ceil(offset / perPage);
 };
 
 export default calculatePage;
