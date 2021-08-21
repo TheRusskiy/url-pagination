@@ -22,7 +22,7 @@ export default function Pagination({
   perPage,
   hrefBuilder,
 }: Props) {
-  const pageCount = calculatePage({ total, perPage });
+  const pageCount = calculatePage({ offset: total, perPage });
   const hasPrev = page > 0;
   const hasNext = page + 1 < pageCount;
   const linkClassName =
