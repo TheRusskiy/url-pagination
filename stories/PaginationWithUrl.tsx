@@ -14,7 +14,7 @@ const PaginationWithUrl = ({ total }: Props) => {
 
   return (
     <div>
-      <h2>Pagination that uses state:</h2>
+      <h2>Pagination that uses url:</h2>
       <button onClick={() => pagination.onChange(pagination.page - 1)}>Prev</button>
       <button onClick={() => pagination.onChange(pagination.page + 1)}>Next</button>
       <pre>

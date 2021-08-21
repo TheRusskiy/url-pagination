@@ -58,7 +58,7 @@ const PaginationWithUrl = () => {
 
   return (
     <div>
-      <h2 className="text-2xl mb-4">Pagination that uses state:</h2>
+      <h2 className="text-2xl mb-4">Pagination that uses URL:</h2>
       <ul className="mb-2">
         {data.results.map((d, i) => (
           <li key={i} className="p-1 list-disc">
@@ -82,8 +82,8 @@ const Home: NextPage = () => {
 
       <main className="flex justify-center mt-2">
         <div className="flex flex-col gap-10">
-          <PaginationWithState />
           <PaginationWithUrl />
+          <PaginationWithState />
         </div>
       </main>
     </div>
