@@ -45,7 +45,7 @@ export default function useUrlPagination({
   const onPerPageChange = (newPerPage: number) =>
     pushWithParams(
       router,
-      { [perPageKey]: newPerPage + 1 },
+      { [perPageKey]: newPerPage },
       {
         shallow: shallowNavigation,
       }
