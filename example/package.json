@@ -16,7 +16,7 @@
     "react-paginate": "^7.1.3",
     "swr": "^0.5.6",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "url-pagination": "^0.3.7"
+    "url-pagination": "^0.3.8"
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",

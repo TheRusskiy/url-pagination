@@ -3646,10 +3646,10 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-url-pagination@^0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/url-pagination/-/url-pagination-0.3.7.tgz#d0626b4cc9135dbf12609fbf349ad713db7a3eea"
-  integrity sha512-CuxZleFWAKh+CP2YScARWvYSF7jahnwOw12AR2mji3QbOH9/M5lDKvru/8ULdKqOYhXxcYuCVoPADe0xTQzWOw==
+url-pagination@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/url-pagination/-/url-pagination-0.3.8.tgz#aa5c60bea32ee6a3cf728fcaaa4d586987947ac9"
+  integrity sha512-1y0GiAPV49TaiVMG4GbxQU8oLCEdJeSKNdLcaBXYiWkf6putuQpyPvjFMcde2hCYbLH7TkI0xOQuCi5mmLehEg==
   dependencies:
     lodash "^4.17.21"
     lodash-es "^4.17.21"
